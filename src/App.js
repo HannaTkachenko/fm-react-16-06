@@ -4,40 +4,51 @@ import React from "react";
 import Chao from "./components/Chao";
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      users:[
+      isStraightSortId:true,
+      users: [
         {
-          id:1,
-          fname:'Elon'
+          id: 3,
+          fname: "Elon",
         },
         {
-          id:2,
-          fname:'Rob'
+          id: 2,
+          fname: "Rob",
         },
         {
-          id:3,
-          fname:'Tom'
+          id: 1,
+          fname: "Tom",
         },
         {
-          id:4,
-          fname:'Alex'
+          id: 4,
+          fname: "Alex",
         },
         {
-          id:5,
-          fname:'Max'
+          id: 5,
+          fname: "Max",
         },
-      ]
-    }
+      ],
+    };
+  }
+  sortUsers=()=>{
+    const { users, isStraightSortId } = this.state;
+    //const copyUsers = [...users];
+    const copyUsers = JSON.parse(JSON.stringify(users));
+    copyUsers.sort((prev, next)=>{
+      return isStraightSortId? prev.id-next.id : next.id-prev.id 
+    });
+    this.setState({users:copyUsers, isStraightSortId:!isStraightSortId});
   }
   render() {
-    const {users}  = this.state;
-    return <>
-      <Chao name={users[0].fname}/>
-      <Chao name={users[1].fname} />
-      <Chao name={users[2].fname}/>
-    </>;
+    const { users, isStraightSortId:isUp } = this.state;
+    return (
+      <>
+      <button onClick={this.sortUsers}>sort by id {isUp?'Up':'Down'}</button>
+      {users.map(({ id, fname }) => <Chao key={id} id={id} name={fname} />)}
+      </>
+    );
   }
 }
 
