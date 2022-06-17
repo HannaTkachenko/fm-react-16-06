@@ -12,11 +12,13 @@ class Chao extends Component {
   render() {
     const {name} = this.props;
     const {isHi} = this.state;
-    //const wordHi = isHi ? 'Hi' : 'Bye';
-    return <>
-      <h2>{isHi ? 'Hi' : 'Bye'}! {name}!</h2>
-      <button onClick={this.switchState}>Switch</button>
-    </>
+    if(isHi){
+      return <>
+        <h2>Hi! {name}!</h2>
+        <button onClick={this.switchState}>Switch</button>
+      </>
+    }
+    return <p>Bye, {name}!</p>;
   }
 }
 

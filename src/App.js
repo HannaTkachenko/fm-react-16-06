@@ -3,15 +3,23 @@ import "./App.css";
 import React from "react";
 import Chao from "./components/Chao";
 
-function App() {
-  const user = {
-    fullName: "Elon Musk"
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      user:{
+        fullName: "Elon Musk"
+      }      
+    }
   }
-  return <>
-    <Chao name={user.fullName}/>
-    <Chao name="Elen Musk"  />
-    <Chao name="Rob Bob"/>
-  </>;
+  render() {
+    const {user}  = this.state;
+    return <>
+      <Chao name={user.fullName}/>
+      <Chao name="Elen Musk"  />
+      <Chao name="Rob Bob"/>
+    </>;
+  }
 }
 
 export default App;
