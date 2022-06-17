@@ -7,7 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isStraightSortId:true,
+      isStraightSortId: true,
+      isStraightSortName: true,
       users: [
         {
           id: 3,
@@ -32,24 +33,54 @@ class App extends React.Component {
       ],
     };
   }
-  sortUsers=()=>{
-    const { users, isStraightSortId } = this.state;
-    //const copyUsers = [...users];
-    const copyUsers = JSON.parse(JSON.stringify(users));
-    copyUsers.sort((prev, next)=>{
-      return isStraightSortId? prev.id-next.id : next.id-prev.id 
+  sortUsersByName = () => {
+    const { users, isStraightSortName } = this.state;
+    const copyUsers = [...users];
+    //const copyUsers = JSON.parse(JSON.stringify(users));
+    copyUsers.sort((prev, next) => {
+      if(prev.fname < next.fname){
+        return isStraightSortName ? -1 : 1;
+      }
+      if(prev.fname > next.fname){
+        return isStraightSortName ? 1 : -1;
+      }
     });
-    this.setState({users:copyUsers, isStraightSortId:!isStraightSortId});
-  }
+    this.setState({
+      users: copyUsers,
+      isStraightSortName: !isStraightSortName,
+    });
+  };
+  sortUsersById = () => {
+    const { users, isStraightSortId } = this.state;
+    const copyUsers = [...users];
+    //const copyUsers = JSON.parse(JSON.stringify(users));
+    copyUsers.sort((prev, next) => {
+      return isStraightSortId ? prev.id - next.id : next.id - prev.id;
+    });
+    this.setState({ 
+      users: copyUsers, 
+      isStraightSortId: !isStraightSortId 
+    });
+  };
   render() {
-    const { users, isStraightSortId:isUp } = this.state;
+    const {
+      users,
+      isStraightSortId: isUp,
+      isStraightSortName: isAlpha,
+    } = this.state;
     return (
       <>
-      <button onClick={this.sortUsers}>sort by id {isUp?'Up':'Down'}</button>
-      {users.map(({ id, fname }) => <Chao key={id} id={id} name={fname} />)}
+        <button onClick={this.sortUsersByName}>
+          sort by name {isAlpha ? "Up" : "Down"}
+        </button>
+        <button onClick={this.sortUsersById}>
+          sort by id {isUp ? "Up" : "Down"}
+        </button>
+        {users.map(({ id, fname }) => (
+          <Chao key={id} id={id} name={fname} />
+        ))}
       </>
     );
   }
 }
-
 export default App;
