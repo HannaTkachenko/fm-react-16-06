@@ -7,17 +7,36 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      user:{
-        fullName: "Elon Musk"
-      }      
+      users:[
+        {
+          id:1,
+          fname:'Elon'
+        },
+        {
+          id:2,
+          fname:'Rob'
+        },
+        {
+          id:3,
+          fname:'Tom'
+        },
+        {
+          id:4,
+          fname:'Alex'
+        },
+        {
+          id:5,
+          fname:'Max'
+        },
+      ]
     }
   }
   render() {
-    const {user}  = this.state;
+    const {users}  = this.state;
     return <>
-      <Chao name={user.fullName}/>
-      <Chao name="Elen Musk"  />
-      <Chao name="Rob Bob"/>
+      <Chao name={users[0].fname}/>
+      <Chao name={users[1].fname} />
+      <Chao name={users[2].fname}/>
     </>;
   }
 }
