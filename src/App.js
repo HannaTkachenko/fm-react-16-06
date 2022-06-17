@@ -8,9 +8,9 @@ function App() {
     fullName: "Elon Musk"
   }
   return <>
-    <Chao name={user.fullName} isHi/>
+    <Chao name={user.fullName}/>
     <Chao name="Elen Musk"  />
-    <Chao name="Rob Bob" isHi/>
+    <Chao name="Rob Bob"/>
   </>;
 }
 
