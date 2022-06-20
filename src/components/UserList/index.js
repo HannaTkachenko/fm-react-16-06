@@ -1,40 +1,24 @@
 import React, { Component } from 'react';
 import UserCard from '../UserCard';
 
-const userDB = [
-  {
-    id: 1,
-    fname: "Elon",
-  },
-  {
-    id: 2,
-    fname: "Rob",
-  },
-  {
-    id: 3,
-    fname: "Tom",
-  },
-  {
-    id: 4,
-    fname: "Alex",
-  },
-  {
-    id: 5,
-    fname: "Max",
-  },
-];
 class UserList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      users:userDB,
-    }
   }
 
-  mapUsers = (user)=> <UserCard  key={user.id} user={user}/>;
+  userSelector = (id)=>{
+    const {users, setUserSelector} = this.props;
+    const newUsers = users.map((user)=>({...user, 
+      isSelected: id===user.id ? !user.isSelected : user.isSelected,
+    }))
+    setUserSelector(newUsers);
+    //this.setState({users: newUsers})
+  }
+
+  mapUsers = (user)=> <UserCard  key={user.id} user={user} userSelector={this.userSelector}/>;
   
   render() {
-    const {users} = this.state;
+    const {users} = this.props;
     return (
       <section>
         <h1>Users List</h1>
