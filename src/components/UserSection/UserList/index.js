@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import UserCard from "../UserCard";
 
 const UserList = (props) => {
-  const { users, setUserSelector } = props;
+  const {users} = props;
   const userSelector = (id) => {
     const { users, setUserSelector } = props;
     const newUsers = users.map((user) => ({
