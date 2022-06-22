@@ -11,3 +11,6 @@
 .invalid{
   background-color: #ff000030;
 }
+.email{
+  border: 2px solid red;
+}

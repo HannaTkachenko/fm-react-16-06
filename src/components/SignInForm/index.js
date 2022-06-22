@@ -1,34 +1,37 @@
 import React, { Component, createContext } from "react";
+import cx from "classnames";
 import styles from "./SignInForm.module.css";
-const initialState ={
-      email:'',
-      pwd:'',
-      emailIsValid: true,
-      pwdIsValid: true,
-    } ;
+const initialState = {
+  email: "",
+  pwd: "",
+  emailIsValid: true,
+  pwdIsValid: true,
+};
 class SignInForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {...initialState};
+    this.state = { ...initialState };
   }
 
-  handleForm =(event) =>{
+  handleForm = (event) => {
     event.preventDefault();
     event.target.reset();
-    this.setState({...initialState});
-  }
+    this.setState({ ...initialState });
+  };
 
-  handlerInput = ({target:{name, value}}) => 
-  this.setState({[name]: value, [`${name}IsValid`]:value.includes(' ')});
+  handlerInput = ({ target: { name, value } }) =>
+    this.setState({ [name]: value, [`${name}IsValid`]: value.includes(" ") });
 
   render() {
-    const {email, pwd, emailIsValid, pwdIsValid} = this.state;
-    const emailClass = cx({[styles.input]:true, [styles.invalid]: emailIsValid});
-    const pwdlClass = cx({[styles.input]:true, [styles.invalid]: pwdIsValid});
+    const { email, pwd, emailIsValid, pwdIsValid } = this.state;
+    const emailClass = cx(styles.input, styles.email, {
+      [styles.invalid]: emailIsValid,
+    });
+    const pwdlClass = cx(styles.input, { [styles.invalid]: pwdIsValid });
     return (
       <form className={styles.form} onSubmit={this.handleForm}>
         <input
-          onChange = {this.handlerInput}
+          onChange={this.handlerInput}
           value={email}
           className={emailClass}
           type="text"
@@ -36,7 +39,7 @@ class SignInForm extends Component {
           placeholder="email"
         />
         <input
-          onChange = {this.handlerInput}
+          onChange={this.handlerInput}
           value={pwd}
           className={pwdlClass}
           type="password"
@@ -50,11 +53,3 @@ class SignInForm extends Component {
 }
 
 export default SignInForm;
-
-
-function cx(objStyles){
-  return Object.entries(objStyles)
-    .filter(([className, check])=>check)
-    .map(([className, check])=>className)
-    .join(' ')
-}
