@@ -1,12 +1,11 @@
 import "./App.css";
 import React, { Component } from "react";
-import StopWatch from "./components/StopWatch";
-import UserSection from './components/UserSection';
+import SignInForm from "./components/SignInForm";
+
 
 const App = () => {
   return <>
-    <StopWatch />
-    <UserSection />
+    <SignInForm />
   </>;
 };
 export default App;
