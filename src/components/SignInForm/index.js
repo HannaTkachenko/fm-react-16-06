@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import styles from "./SignInForm.module.css";
 const initialState ={
       email:'',
       pwd:'',
-      emailIsValid: false,
-      pwdIsValid: false,
+      emailIsValid: true,
+      pwdIsValid: true,
     } ;
 class SignInForm extends Component {
   constructor(props) {
@@ -19,12 +19,12 @@ class SignInForm extends Component {
   }
 
   handlerInput = ({target:{name, value}}) => 
-  this.setState({[name]: value, [`${name}IsValid`]:!value.includes(' ')});
+  this.setState({[name]: value, [`${name}IsValid`]:value.includes(' ')});
 
   render() {
     const {email, pwd, emailIsValid, pwdIsValid} = this.state;
-    const emailClass = `${styles.input} ${emailIsValid?styles.valid:styles.invalid}`;
-    const pwdlClass = `${styles.input} ${pwdIsValid?styles.valid:styles.invalid}`;
+    const emailClass = cx({[styles.input]:true, [styles.invalid]: emailIsValid});
+    const pwdlClass = cx({[styles.input]:true, [styles.invalid]: pwdIsValid});
     return (
       <form className={styles.form} onSubmit={this.handleForm}>
         <input
@@ -50,3 +50,11 @@ class SignInForm extends Component {
 }
 
 export default SignInForm;
+
+
+function cx(objStyles){
+  return Object.entries(objStyles)
+    .filter(([className, check])=>check)
+    .map(([className, check])=>className)
+    .join(' ')
+}
