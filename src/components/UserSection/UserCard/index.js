@@ -3,8 +3,7 @@ import { PropTypes } from 'prop-types';
 
 
 const UserCard = (props) => {
-  const { user:{id, fname, isSelected}, 
-  userSelector=()=>{} } = props;
+  const { user:{id, fname, isSelected}, userSelector } = props;
   const styles = { border: isSelected ? "solid teal 2px" : undefined };
   const btnHandler=()=>userSelector(id);
   return (
@@ -17,6 +16,11 @@ const UserCard = (props) => {
   );
 };
 
+UserCard.defaultProps = {
+  userSelector: ()=>{},
+  user:{id:0, fname:'Anonim', isSelected:false}
+}
+
 export const userShape = PropTypes.shape({
   id:PropTypes.number.isRequired,
   fname: PropTypes.string.isRequired,
@@ -27,5 +31,7 @@ UserCard.propTypes = {
   user: userShape.isRequired,
   userSelector: PropTypes.func,
 }
+
+
 
 export default UserCard;
