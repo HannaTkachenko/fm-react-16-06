@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { format, add, getWeeksInMonth } from 'date-fns';
 import SectionMonth from './SectionMonth/index';
+import styles from './Calendar.module.scss';
 
 class Calendar extends Component {
   constructor(props) {
@@ -22,10 +23,10 @@ class Calendar extends Component {
     const {date} = this.state;
     const result = getWeeksInMonth(date)
     return (
-      <div>
+      <div className={styles.container}>
         <p>{result}</p>
         <p>{format(date, "dd MMMM yyyy'year', cccc")}</p>
-        <button onClick={()=>this.handlerBtn({days:1})}>+1 day</button>
+        <button className={styles.container__btn} onClick={()=>this.handlerBtn({days:1})}>+1 day</button>
         <button onClick={()=>this.handlerBtn({weeks:1})}>+1 week</button>
         <button onClick={()=>this.handlerBtn({months:1})}>+1 month</button>
         <SectionMonth />

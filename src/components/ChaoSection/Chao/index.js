@@ -1,5 +1,6 @@
 import { Component } from "react";
 import PropTypes from 'prop-types';
+import styles from './Chao.module.scss';
 
 class Chao extends Component {
   /**
@@ -21,10 +22,10 @@ class Chao extends Component {
     const {isHi} = this.state;
 
     if(isHi){
-      return <>
-        <h2>{id}) Hi! {name}!</h2>
-        <button onClick={this.switchState}>Switch</button>
-      </>
+      return <div className={styles.container}>
+        <h2 className={styles.container__h2}>{id}) Hi! {name}!</h2>
+        <button className={styles.container__btn} onClick={this.switchState}>Switch</button>
+      </div>
     }
     return <p>{id}) Bye, {name}!</p>;
   }

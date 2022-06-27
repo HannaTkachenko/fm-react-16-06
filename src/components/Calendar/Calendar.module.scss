@@ -1,0 +1,16 @@
+@import './../../../common/styles/breakpoints';
+@import './../../../common/styles/template';
+@import './../../../common/styles/variables';
+.container{
+  background-color: $bg-color;
+  color:$text-color;
+  @extend %text-align;
+  &__btn{
+    display: inline-block;
+    width: $size*5;
+    @extend %one-line;
+    @media screen and (min-width: $md) {
+      width: $size;
+    }
+  }
+}
