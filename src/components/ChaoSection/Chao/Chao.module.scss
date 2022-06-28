@@ -1,11 +1,13 @@
 @import './../../../common/styles/breakpoints';
-@import './../../../common/styles/template';
 @import './../../../common/styles/variables';
+@import './../../../common/styles/template';
+@import './../../../common/styles/mixin';
 .container{
   background-color: $bg-color;
   color:$text-color;
   @extend %text-align;
   &__h2{
+    @include border-line(2px, dotted, $text-color);
     padding-top: $size/4;
     &:hover{
       text-decoration: underline;
