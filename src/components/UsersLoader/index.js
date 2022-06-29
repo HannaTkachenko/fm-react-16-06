@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {getUsers}  from '../../api';
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -17,10 +18,9 @@ class UsersLoader extends Component {
     </li>
   );
 
-  componentDidMount() {
+  load=()=>{
     const {pageNum} = this.state;
-    fetch(`https://randomuser.me/api/?results=15&page=${pageNum}&seed=users&nat=gb`)
-      .then((response) => response.json())
+    getUsers(pageNum)
       .then((data) =>
         this.setState({
           users: data.results,
@@ -37,26 +37,14 @@ class UsersLoader extends Component {
         })
       })
   }
+
+  componentDidMount() {
+    this.load();
+  }
   componentDidUpdate(prevProps, prevState) {
     const {pageNum} = this.state;
     if (pageNum !== prevState.pageNum){  
-    fetch(`https://randomuser.me/api/?results=15&page=${pageNum}&seed=users&nat=gb`)
-      .then((response) => response.json())
-      .then((data) =>
-        this.setState({
-          users: data.results,
-        })
-      )
-      .catch((err) =>
-        this.setState({
-          isError: true,
-        })
-      )
-      .finally(()=>{
-        this.setState({
-          isFetching: false,
-        })
-      })
+    this.load();
     }
   }
   prevPage=()=>{
@@ -76,6 +64,8 @@ class UsersLoader extends Component {
     }
     return (
       <section>
+        {/* {isFetching && <p>Loading...</p>} */}
+        {/* {isError && <p>Error</p>} */}
         <h2>Users List</h2>
         <button onClick={this.prevPage}>&lt;</button>
         <button onClick={this.nextPage}>&gt;</button>
