@@ -14,19 +14,25 @@ class UsersLoader extends Component {
   }
 
   showUser = (user) => (
-    <li key={user.login.uuid}>
-      {user.name.first} {user.name.last}
+    <li key={user.login.uuid}> {JSON.stringify(user, null, 4)}
+      {/* {user.name.first} {user.name.last} (gender: {user.gender})
+      (nat: {user.nat}) */}
     </li>
   );
 
   load=()=>{
     const {pageNum} = this.state;
-    getUsers(pageNum)
-      .then((data) =>
-        this.setState({
+    getUsers({page:pageNum, results:2, nat:'de', gender:'female'})
+      .then((data) =>{
+        if(data.error){
+          return this.setState({
+            isError: true,
+          })
+        }
+        return this.setState({
           users: data.results,
         })
-      )
+      })
       .catch((err) =>
         this.setState({
           isError: true,
