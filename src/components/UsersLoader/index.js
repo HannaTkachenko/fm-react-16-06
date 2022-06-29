@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {getUsers}  from '../../api';
+import Spinner from "../Spinner";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class UsersLoader extends Component {
   render() {
     const { users, isError, isFetching, pageNum } = this.state;
     if (isFetching) {
-      return <p>Loading...</p>;
+      return <Spinner />;
     }
     if (isError) {
       return <p>Error</p>;
