@@ -1,4 +1,5 @@
 import queryString from "query-string";
+import config from '../config';
 /**
  *
  * @param {object} options
@@ -6,16 +7,17 @@ import queryString from "query-string";
  * @param {number} options.page
  * @param {string} options.seed
  * @param {string} options.nat
+ * @param {string} options.inc
  * @param {string} options.gender
  *
  * @returns {Promise}
  */
 export const getUsers = (options = {}) => {
   const defaultOptions = {
-    results: 5,
+    results: config.DEFAULT_AMOUNT,
     page: 1,
-    seed: "users",
-    nat: "gb",
+    seed: config.API_KEY,
+    nat: config.DEFAULT_NAT,
     inc:'login,gender,name,nat',
     gender:'male'
   };
@@ -23,9 +25,8 @@ export const getUsers = (options = {}) => {
     ...defaultOptions,
     ...options,
   };
-console.log(queryString.stringify(finallyOptions))
   return fetch(
-    `https://randomuser.me/api/?${queryString.stringify(finallyOptions)}`
+    `${config.BASE_URL}/?${queryString.stringify(finallyOptions)}`
   ).then((response) => response.json());
 };
 

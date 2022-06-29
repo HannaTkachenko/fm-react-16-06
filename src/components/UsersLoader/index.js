@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getUsers } from "../../api";
 import Spinner from "../Spinner";
+import config from '../../config';
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class UsersLoader extends Component {
       isFetching: true,
       isError: false,
       pageNum: 1,
+      currentNat: config.DEFAULT_NAT,
     };
   }
 
@@ -22,8 +24,8 @@ class UsersLoader extends Component {
   );
 
   load = () => {
-    const { pageNum } = this.state;
-    getUsers({ page: pageNum, results: 2, nat: "de", gender: "female" })
+    const { pageNum, currentNat } = this.state;
+    getUsers({ page: pageNum, nat: currentNat })
       .then((data) => {
         if (data.error) {
           return this.setState({
@@ -50,8 +52,9 @@ class UsersLoader extends Component {
     this.load();
   }
   componentDidUpdate(prevProps, prevState) {
-    const { pageNum } = this.state;
-    if (pageNum !== prevState.pageNum) {
+    const { pageNum, currentNat } = this.state;
+    const isUpdate = (pageNum !== prevState.pageNum) || (currentNat!==prevState.currentNat);
+    if (isUpdate) {
       this.load();
     }
   }
@@ -62,8 +65,14 @@ class UsersLoader extends Component {
   };
   nextPage = () => this.setState((state) => ({ pageNum: state.pageNum + 1 }));
 
+  handleChangeNat = ({target:{value}})=>{
+    this.setState({
+      currentNat: value,
+    });
+  }
+
   render() {
-    const { users, isError, isFetching, pageNum } = this.state;
+    const { users, isError, isFetching, pageNum, currentNat } = this.state;
     if (isFetching) {
       return <Spinner />;
     }
@@ -78,12 +87,15 @@ class UsersLoader extends Component {
         <button onClick={this.prevPage}>&lt;</button>
         <button onClick={this.nextPage}>&gt;</button>
         <span> page: {pageNum} </span>
-        <select>
+        <select onChange={this.handleChangeNat} value={currentNat}>
           <option value="ch">CH</option>
           <option value="de">DE</option>
-          <option selected value="fr">FR</option>
+          <option value="fr">FR</option>
           <option value="gb">GB</option>
         </select>
+        <span> amount:</span>
+        <label><input type='radio' value={10} name="results"/>10</label>
+        <label><input type='radio' value={20} name="results"/>20</label>
         <ul>{users.map(this.showUser)}</ul>
       </section>
     );
