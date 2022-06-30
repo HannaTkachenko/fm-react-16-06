@@ -1,10 +1,14 @@
 import React from "react";
-import UsersLoader from './components/UsersLoader';
+
 
 const App = () => {
   return (
     <>
-     <UsersLoader />
+      <button onClick={()=>{window.open('https://translate.google.com.ua/')}}>open</button>
+      <button onClick={()=>{window.close()}}>close</button>
+      <button onClick={()=>{window.location.assign('https://www.w3schools.com/')}}>assign</button>
+      <button onClick={()=>{window.location.replace('https://www.w3schools.com/')}}>replace</button>
+      <button onClick={()=>{window.location.reload()}}>reload</button>
     </>
   );
 };

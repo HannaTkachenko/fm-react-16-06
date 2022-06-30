@@ -13,6 +13,7 @@ class UsersLoader extends Component {
       pageNum: 1,
       currentNat: config.DEFAULT_NAT,
     };
+    //this.handleChangeNat = this.handleChangeNat.bind(this)
   }
 
   showUser = (user) => (
@@ -65,7 +66,7 @@ class UsersLoader extends Component {
   };
   nextPage = () => this.setState((state) => ({ pageNum: state.pageNum + 1 }));
 
-  handleChangeNat = ({target:{value}})=>{
+  handleChangeNat=({target:{value}})=>{
     this.setState({
       currentNat: value,
     });
