@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styles from './Counter.module.sass'
 
 class Counter extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Counter extends Component {
   render() {
     const {count} = this.state;
     return (
-      <section>
+      <section className={styles.container}>
         <h2>count: {count}</h2>
         <button onClick={this.increment}>+</button>
         <button onClick={this.decrement}>-</button>
