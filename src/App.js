@@ -10,6 +10,7 @@ import Dashboard from "./page/Dashboard";
 import Chao from "./components/ChaoSection/Chao/index";
 import StopWatch from "./components/StopWatch/index";
 import PageNotFound from './page/PageNotFound';
+import PageCounter from './page/PageCounter';
 
 
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/winsize">WindowSizes</Link>
+              <Link to="/counter">Counter</Link>
             </li>
             <li>
               Dashboard
@@ -40,7 +41,7 @@ const App = () => {
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/winsize" element={<WindowSizes />} />
+          <Route path="/counter" element={<PageCounter />} />
           <Route path="/dash/" element={<Dashboard />}>
             <Route path="chao" element={<Chao name="elon" id={1} />} />
             <Route path="stop" element={<StopWatch />} />
