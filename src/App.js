@@ -11,6 +11,7 @@ import Chao from "./components/ChaoSection/Chao/index";
 import StopWatch from "./components/StopWatch/index";
 import PageNotFound from './page/PageNotFound';
 import PageCounter from './page/PageCounter';
+import PageLoader from './page/PageLoader';
 
 
 const App = () => {
@@ -25,6 +26,9 @@ const App = () => {
             </li>
             <li>
               <Link to="/counter">Counter</Link>
+            </li>
+            <li>
+              <Link to="/loader">Loader</Link>
             </li>
             <li>
               Dashboard
@@ -42,6 +46,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/counter" element={<PageCounter />} />
+          <Route path="/loader" element={<PageLoader />}/>
           <Route path="/dash/" element={<Dashboard />}>
             <Route path="chao" element={<Chao name="elon" id={1} />} />
             <Route path="stop" element={<StopWatch />} />
