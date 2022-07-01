@@ -1,36 +1,35 @@
 import React, { Component } from 'react';
 
-class NameList extends Component {
+class DataProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      names:[],
+      items:[],
       error:null,
       isFetching: false
     }
   }
 
-  componentDidMount(){
+  load=()=>{
+    const {getItems} = this.props;
     this.setState({isFetching:true});
-    fetch('/name.json')
-      .then((res)=>res.json())
-      .then((data)=>this.setState({names:data}))
+    getItems()
+      .then((data)=>this.setState({items:data}))
       .catch((error)=>this.setState({error:error}))
       .finally(()=>this.setState({isFetching:false}))
   }
+
+  componentDidMount(){this.load()}
   
   render() {
-    const {names, error, isFetching} = this.state;
+    const {error, isFetching} = this.state;
+    const {render} = this.props;
+    
     if(error){return <p>Error!</p>}
     if(isFetching){return <p>Loading!</p>}
-    return (
-      <ul>
-        {
-          names.map(({id, fname})=><li key={id}>{fname}</li>)
-        }
-      </ul>
-    );
+
+    return render(this.state);
   }
 }
 
-export default NameList;
+export default DataProvider;
