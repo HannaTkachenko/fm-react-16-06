@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import cx from "classnames";
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import styles from "./Header.module.scss";
 import { UserContext, ThemeContext } from "../../context/index";
 import CONSTANTS from "../../constants";
@@ -18,10 +20,10 @@ class Header extends Component {
             <UserContext.Consumer>
               {(user) => (
                 <header className={classNames}>
-                  <button onClick={()=>{
+                  <div onClick={()=>{
                     const newTheme = theme===THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
                     setTheme(newTheme);
-                  }}>switch theme</button>
+                  }}>{theme===THEMES.LIGHT ? <WbSunnyIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}</div>
                   <p>
                     Hi, {user.fname} {user.lname}
                   </p>

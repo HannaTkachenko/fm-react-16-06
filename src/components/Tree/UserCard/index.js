@@ -10,7 +10,7 @@ const UserCard = (props) => {
           <h3>
             {user.fname} {user.lname}
           </h3>
-          <img src={user.imgSrc} />
+          <img src={user.imgSrc} alt={user.lname}/>
         </section>
       )}
     </UserContext.Consumer>
