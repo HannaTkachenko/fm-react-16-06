@@ -1,66 +1,39 @@
-import React from "react";
-import {
-  BrowserRouter,
-  Link,
-  Route,
-  Routes
-} from "react-router-dom";
-import WindowSizes from "./components/WindowSizes";
-import Dashboard from "./page/Dashboard";
-import Chao from "./components/ChaoSection/Chao/index";
-import StopWatch from "./components/StopWatch/index";
-import PageNotFound from './page/PageNotFound';
-import PageCounter from './page/PageCounter';
-import PageLoader from './page/PageLoader';
+import React, { Component } from "react";
+import Tree from "./components/Tree/index";
+import Header from "./components/Header/index";
+import { UserContext, ThemeContext } from "./context/index";
+import CONSTANTS from "./constants";
+const {THEMES} = CONSTANTS;
 
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: THEMES.LIGHT,
+      user: {
+        id: 1,
+        fname: "Elon",
+        lname: "Musk",
+        imgSrc:
+          "https://res.cloudinary.com/crunchbase-production/image/upload/c_thumb,h_256,w_256,f_auto,g_faces,z_0.7,q_auto:eco,dpr_1/hevy6dvk7gien0rmg37n",
+      },
+    };
+  }
 
-const App = () => {
-  return (
-    <>
-      <div>static start for application</div>
-      <BrowserRouter>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/counter">Counter</Link>
-            </li>
-            <li>
-              <Link to="/loader">Loader</Link>
-            </li>
-            <li>
-              Dashboard
-              <ul>
-                <li>
-                  <Link to="/dash/chao">chao</Link>
-                </li>
-                <li>
-                  <Link to="/dash/stop">stop</Link>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/counter" element={<PageCounter />} />
-          <Route path="/loader" element={<PageLoader />}/>
-          <Route path="/dash/" element={<Dashboard />}>
-            <Route path="chao" element={<Chao name="elon" id={1} />} />
-            <Route path="stop" element={<StopWatch />} />
-          </Route>
-          <Route path="/*" element={<PageNotFound />} />
-        </Routes>
-        <footer>@2022</footer>
-      </BrowserRouter>
-      <div>static end for application</div>
-    </>
-  );
-};
+  //setTheme = (theme) => this.setState({theme:theme});
+  setTheme = (theme) => this.setState({theme});
 
-const Home = () => <section>HOME</section>;
-
+  render() {
+    const { user, theme } = this.state;
+    return (
+      <ThemeContext.Provider value={[theme, this.setTheme]}>
+        <UserContext.Provider value={user}>
+          <Header />
+          <Tree />
+        </UserContext.Provider>
+      </ThemeContext.Provider>
+    );
+  }
+}
 
 export default App;
