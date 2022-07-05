@@ -13,8 +13,24 @@ class SignInForm extends Component {
     this.state = { ...initialState };
   }
 
+  handleForm = (event) => {
+    event.preventDefault();
+    event.target.reset();
+    this.setState({ ...initialState });
+  };
+
+  handlerInput = ({ target: { name, value } }) =>
+    this.setState({ [name]: value, [`${name}IsValid`]: value.includes(" ") });
+
   render() {
-      return null;
+    const { email, pwd, emailIsValid, pwdIsValid } = this.state;
+    const emailClass = cx(styles.input, styles.email, {
+      [styles.invalid]: emailIsValid,
+    });
+    const pwdlClass = cx(styles.input, { [styles.invalid]: pwdIsValid });
+    return (
+      null
+    )
   }
 }
 
