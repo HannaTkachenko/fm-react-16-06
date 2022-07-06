@@ -5,11 +5,11 @@ import { SCHEMA_SIGN_IN } from "../../../utils/schemaValidation";
 import styles from "./SignInForm.module.scss";
 
 
-const initialValues = { email: "", password: "" };
+const initialValues = { email: "", password: "", passconfirm:"" };
 const SignInForm = (props) => {
   const onSubmit = (value, formikBag) => {
     // console.group();
-    // console.log("value: ", value);
+    console.log("value: ", value);
     // console.log("formikBag: ", formikBag);
     // console.groupEnd();
     formikBag.resetForm();
@@ -26,6 +26,7 @@ const SignInForm = (props) => {
           <Form className={styles.form}>
             <WrappedInput name="email" placeholder="Enter email"/>
             <WrappedInput name="password" type="password" placeholder="Enter password"/>
+            <WrappedInput name="passconfirm" type="password" placeholder="Repeat password"/>
             <input type="submit" value="send" />
           </Form>
         );

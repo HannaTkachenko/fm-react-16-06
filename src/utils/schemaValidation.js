@@ -26,4 +26,5 @@ export const SCHEMA_SIGN_UP = Yup.object({
 export const SCHEMA_SIGN_IN = Yup.object({
   email: SCHEMA_EMAIL,
   password: SCHEMA_PASSWORD,
+  passconfirm:Yup.string().oneOf([Yup.ref('password')], 'Pass not equel')
 });
