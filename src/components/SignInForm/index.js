@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SCHEMA_SIGN_IN } from "../../utils/schemaValidation";
-import styles from './SignInForm.module.scss';
+import styles from "./SignInForm.module.scss";
 
 const initialValues = { email: "", password: "" };
 const SignInForm = (props) => {
@@ -22,12 +22,16 @@ const SignInForm = (props) => {
         console.log("formikProps:", formikProps);
         return (
           <Form className={styles.form}>
-            <Field name="email" />
-            <ErrorMessage  name="email" component="em" />
-            {/* {formikProps.errors.email && formikProps.touched.email && <em>{formikProps.errors.email}</em>} */}
-            <Field name="password" />
-            <ErrorMessage  name="password" component="em" />
-            {/* {formikProps.errors.password && formikProps.touched.password && <em>{formikProps.errors.password}</em>} */}
+            <label>
+              <span>email</span>
+              <Field name="email" />
+              <ErrorMessage name="email" component="em" />
+            </label>
+            <label>
+              <span>password</span>
+              <Field name="password" />
+              <ErrorMessage name="password" component="em" />
+            </label>
             <input type="submit" value="send" />
           </Form>
         );
