@@ -1,49 +1,61 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import styles from "./StopWatch.module.css";
 
 class StopWatch extends Component {
   constructor(props) {
     super(props);
-    this.state = {time:new Date(0,0,0,0,0,0)};
+    this.state = { time: new Date(0, 0, 0, 0, 0, 0) };
     this.idInterval = null;
   }
-  tick=()=>{
-    this.setState((state)=>{
-      const {time} = state;
-      const newTime = new Date(time.getTime()+1000);
-      return {time:newTime};
-    })
-  }
-  start = ()=>{
+  tick = () => {
+    this.setState((state) => {
+      const { time } = state;
+      const newTime = new Date(time.getTime() + 1000);
+      return { time: newTime };
+    });
+  };
+  start = () => {
     this.stop();
-    this.idInterval = setInterval(this.tick, 1000)
-  }
-  stop = ()=>{
+    this.idInterval = setTimeout(this.tick, 1000);
+  };
+  stop = () => {
     clearInterval(this.idInterval);
     this.idInterval = null;
-  }
-  reset = ()=>{
+  };
+  reset = () => {
     this.stop();
-    this.setState({time:new Date(0,0,0,0,0,0)})
-  }
+    this.setState({ time: new Date(0, 0, 0, 0, 0, 0) });
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     this.start();
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
+    this.start();
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.stop();
   }
-  
+
   render() {
-    const {time} = this.state;  
+    const { time } = this.state;
     return (
-      <article>
-        <h2>{time.toLocaleTimeString('it-IT')}</h2>
-        <button onClick={this.start}>START</button>
-        <button onClick={this.reset}>RESET</button>
-        <button onClick={this.stop}>STOP</button>
-      </article>
+      <section className={styles["stopWatch-section"]}>
+        <article className={styles.stopWatch}>
+          <h2 className={styles.timer}>{time.toLocaleTimeString("it-IT")}</h2>
+          <div className={styles["btn-container"]}>
+            <button className={styles.start} onClick={this.start}>
+              START
+            </button>
+            <button className={styles.reset} onClick={this.reset}>
+              RESET
+            </button>
+            <button className={styles.stop} onClick={this.stop}>
+              STOP
+            </button>
+          </div>
+        </article>
+      </section>
     );
   }
 }
