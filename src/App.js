@@ -1,11 +1,16 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import LearnHooks from "./components/LearnHooks";
 
 
 const App = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const handlerVisible = ()=>{
+    setIsVisible(!isVisible);
+  }
   return (
     <>
-    <LearnHooks />
+    <button onClick={handlerVisible}>switch visible LearnHooks</button>
+    {isVisible && <LearnHooks />}
     </>
   );
 };

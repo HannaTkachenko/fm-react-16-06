@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const LearnHooks = (props) => {
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  console.log('render');
   const [count, setCount] = useState(0);
-  const handlerMouseMove = (event) => {
-    setCoords({
-      x: event.clientX,
-      y: event.clientY,
-    });
-  };
-  const handlerClick = () => {
-    setCount((prevCount)=>prevCount+1);
-  };
+
+  useEffect(() => {
+    const handlerClick = () => {setCount(count=>count+1);};
+    //добавление побочек
+    //componentDidUpdate
+    document.body.addEventListener("click", handlerClick);
+    console.log('addEventListener');
+    return ()=>{
+      //очистка от побочек
+      //componentWillUnmount
+      document.body.removeEventListener("click", handlerClick);
+      console.log('removeEventListener');
+    }
+  }, 
+  //componentDidMount
+  []);
+  //document.body.addEventListener("click", handlerClick);
   return (
     <div
       style={{
@@ -20,11 +28,8 @@ const LearnHooks = (props) => {
         textAlign: "center",
         paddingTop: "10vh",
       }}
-      onMouseMove={handlerMouseMove}
-      onClick={handlerClick}
+      // onClick={handlerClick}
     >
-      <p>{coords.x}</p>
-      <p>{coords.y}</p>
       <p>Count: {count}</p>
     </div>
   );
