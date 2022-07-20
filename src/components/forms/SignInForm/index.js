@@ -4,15 +4,10 @@ import WrappedInput from "../WrappedInput";
 import { SCHEMA_SIGN_IN } from "../../../utils/schemaValidation";
 import styles from "./SignInForm.module.scss";
 
-
-
 const initialValues = { email: "", password: "", passconfirm:"" };
 const SignInForm = (props) => {
   const onSubmit = (value, formikBag) => {
-    // console.group();
     console.log("value: ", value);
-    // console.log("formikBag: ", formikBag);
-    // console.groupEnd();
     formikBag.resetForm();
   };
   return (
