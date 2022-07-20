@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
 
 const LearnHooks = (props) => {
-  console.log('render');
+  //console.log('render');
   const [count, setCount] = useState(0);
-
+  const [step, setStep] = useState(10);
+  const handlerInput = ({target:{value}})=>{
+    setStep(Number(value))
+  }
   useEffect(() => {
-    const handlerClick = () => {setCount(count=>count+1);};
-    //добавление побочек
-    //componentDidUpdate
+    const handlerClick = () => {setCount(count=>count+step);};
     document.body.addEventListener("click", handlerClick);
     console.log('addEventListener');
     return ()=>{
-      //очистка от побочек
-      //componentWillUnmount
       document.body.removeEventListener("click", handlerClick);
       console.log('removeEventListener');
     }
-  }, 
-  //componentDidMount
-  []);
-  //document.body.addEventListener("click", handlerClick);
+  },[]);
   return (
     <div
       style={{
@@ -31,6 +27,7 @@ const LearnHooks = (props) => {
       // onClick={handlerClick}
     >
       <p>Count: {count}</p>
+      <input value={step} onChange={handlerInput}/>
     </div>
   );
 };
