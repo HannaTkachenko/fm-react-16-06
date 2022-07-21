@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LearnHooks from "./components/LearnHooks";
+import FuncStopWatch from './components/FuncStopWatch/index';
 
 
 const App = () => {
@@ -9,8 +9,8 @@ const App = () => {
   }
   return (
     <>
-    <button onClick={handlerVisible}>switch visible LearnHooks</button>
-    {isVisible && <LearnHooks />}
+    <button onClick={handlerVisible}>switch visible</button>
+    {isVisible && <FuncStopWatch />}
     </>
   );
 };
