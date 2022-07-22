@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {UserContext, ThemeContext}  from "./context";
 import HomePage from './page/HomePage';
 import CONSTANTS from "./constants";
+import NameList from './components/NameList/index';
+import PhoneList from './components/PhoneList/index';
 const {THEMES} = CONSTANTS;
 
 const App = () => {
@@ -14,7 +16,7 @@ const App = () => {
       <UserContext.Provider value={user}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path='/' element={<PhoneList />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
