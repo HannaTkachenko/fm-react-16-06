@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": 14,
+      "name": "Elon Musk"
+    },
+    {
+      "id": 27,
+      "name": "Elen Musk"
+    },
+    {
+      "id": 36,
+      "name": "Fred Qwerty"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "body": "hi message",
+      "authorId": 14
+    },
+    {
+      "id": 2,
+      "body": "qwerty message",
+      "authorId": 27
+    },
+    {
+      "id": 3,
+      "body": "ciao message",
+      "authorId": 14
+    },
+    {
+      "id": 4,
+      "body": "bye message",
+      "authorId": 36
+    }
+  ]
+}

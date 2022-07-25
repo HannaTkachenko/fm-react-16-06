@@ -1,55 +1,33 @@
-import React from "react";
-
-const store = {
-  users: [
-    {
-      id: 14,
-      name: "Elon Musk",
-    },
-    {
-      id: 27,
-      name: "Elen Musk",
-    },
-    {
-      id: 36,
-      name: "Fred Qwerty",
-    },
-  ],
-  messages: [
-    {
-      id: 1,
-      body: "text message",
-      authorId: 14,
-    },
-    {
-      id: 2,
-      body: "text message",
-      authorId: 27,
-    },
-    {
-      id: 3,
-      body: "text message",
-      authorId: 14,
-    },
-    {
-      id: 4,
-      body: "text message",
-      authorId: 36,
-    },
-  ],
-};
+import React, { useReducer, useEffect } from "react";
+import { getChatJSON } from "../../api";
+import reducer from "./reducer";
 
 const Chat = () => {
+  const [state, dispatch] = useReducer(reducer, {
+    users: [],
+    messages: [],
+  });
+  useEffect(() => {
+    getChatJSON().then((data) =>
+      dispatch({
+        type: "DATA_ALL_RESPONSE_SUCCESS",
+        data,
+      }).catch((error)=>dispatch({
+        type: "DATA_ALL_RESPONSE_ERROR",
+        error
+      }))
+    );
+  }, []);
+  const showMessage = (message) => (
+    <article key={message.id}>
+      <h3>{message.author.name}</h3>
+      <p>{message.body}</p>
+    </article>
+  )
   return (
     <div>
-      {store.messages.map((mess) => {
-        return (
-          <p>
-            {mess.body}:
-            {store.users.find((user) => user.id === mess.authorId).name}
-          </p>
-        );
-      })}
+      <h2>Chat</h2>
+      {state.messages.map(showMessage)}
     </div>
   );
 };
