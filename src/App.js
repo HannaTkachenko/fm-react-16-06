@@ -5,15 +5,18 @@ import HomePage from './page/HomePage';
 import CONSTANTS from "./constants";
 import NameList from './components/NameList/index';
 import PhoneList from './components/PhoneList/index';
+import { useClicker } from "./hooks";
 const {THEMES} = CONSTANTS;
 
 const App = () => {
   const [user, setUser] = useState({ id: 1, name: "Elon" });
   const themeStateArr = useState(THEMES.LIGHT);
+  const count = useClicker(100);
   return (
     <>
     <ThemeContext.Provider value={themeStateArr}>
       <UserContext.Provider value={user}>
+        <p>count: {count}</p>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<PhoneList />} />
