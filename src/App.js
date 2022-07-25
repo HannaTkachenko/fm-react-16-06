@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import {UserContext, ThemeContext}  from "./context";
 import HomePage from './page/HomePage';
 import CONSTANTS from "./constants";
-import NameList from './components/NameList/index';
-import PhoneList from './components/PhoneList/index';
 import { useClicker } from "./hooks";
+import SignUpForm from './components/forms/SignUpForm'
 const {THEMES} = CONSTANTS;
 
 const App = () => {
@@ -18,8 +17,15 @@ const App = () => {
       <UserContext.Provider value={user}>
         <p>count: {count}</p>
         <BrowserRouter>
+        <nav>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/signup'>Sign up</Link></li>
+          </ul>
+        </nav>
           <Routes>
-            <Route path='/' element={<PhoneList />} />
+            <Route path='/' element={<HomePage />} />
+            <Route path='/signup' element={<SignUpForm />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
