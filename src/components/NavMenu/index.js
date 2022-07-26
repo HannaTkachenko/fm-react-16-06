@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useId } from "react";
 import { NavLink } from "react-router-dom";
 import cx from "classnames";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
@@ -15,11 +15,11 @@ const NavMenu = () => {
   const classNames = cx(styles.container, {
     [styles.open]: isMenuOpen,
   });
-
-  const navRef = useRef(null);
+  const idNav = useId();
+  //const navRef = useRef(null);
   useEffect(() => {
     const handlerClickMenu = ({ target }) => {
-      if (isMenuOpen && navRef.current.contains(target) === false) {
+      if (isMenuOpen && document.getElementById(idNav).contains(target) === false) {
         closeNavMenu();
       }
     };
@@ -37,17 +37,17 @@ const NavMenu = () => {
     }
   };
   return (
-    <nav className={classNames} ref={navRef}>
+    <nav className={classNames} id={idNav}>
       <MenuOpenIcon
         onClick={openNavMenu}
         className={styles.openBtn}
-        tabindex="1"
+        tabIndex="1"
         onKeyDown={tabOpen}
       />
       <CancelPresentationIcon
         className={styles.closeBtn}
         onClick={closeNavMenu}
-        tabindex="1"
+        tabIndex="1"
         onKeyDown={tabClose}
       />
       <ul className={styles.list}>
