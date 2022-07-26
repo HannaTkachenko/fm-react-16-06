@@ -1,6 +1,9 @@
+import CONSTANTS from "../../constants";
+const {CHAT_TYPES} = CONSTANTS;
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case "DATA_ALL_RESPONSE_SUCCESS": {
+    case CHAT_TYPES.DATA_ALL_RESPONSE_SUCCESS: {
       const {data: { users, messages }} = action;
       const usersMap = new Map();
       users.forEach((user) => usersMap.set(user.id, user));
@@ -15,7 +18,7 @@ const reducer = (state, action) => {
       };
       return newState;
     }
-    case "DATA_ALL_RESPONSE_ERROR": {
+    case CHAT_TYPES.DATA_ALL_RESPONSE_ERROR: {
       const {data: { error}} = action;
       const newState = {
         ...state,

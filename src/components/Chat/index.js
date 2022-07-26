@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect } from "react";
 import { getChatJSON } from "../../api";
 import reducer from "./reducer";
+import CONSTANTS from "../../constants";
+const {CHAT_TYPES} = CONSTANTS;
 
 const Chat = () => {
   const [state, dispatch] = useReducer(reducer, {
@@ -10,10 +12,10 @@ const Chat = () => {
   useEffect(() => {
     getChatJSON().then((data) =>
       dispatch({
-        type: "DATA_ALL_RESPONSE_SUCCESS",
+        type: CHAT_TYPES.DATA_ALL_RESPONSE_SUCCESS,
         data,
       }).catch((error)=>dispatch({
-        type: "DATA_ALL_RESPONSE_ERROR",
+        type: CHAT_TYPES.DATA_ALL_RESPONSE_ERROR,
         error
       }))
     );
