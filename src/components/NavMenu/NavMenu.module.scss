@@ -5,6 +5,7 @@ $widthNavMenu:200px;
   width: $widthNavMenu;
   height: 100vh;
   position: fixed;
+  z-index: 9999;
   top:0;
   bottom: 0;
   // left:0;
@@ -24,6 +25,11 @@ $widthNavMenu:200px;
       text-decoration: underline;
     }
   }
+}
+.openBtn{
+  color: teal;
+  position: fixed;
+  left: 20px;
 }
 .closeBtn{
   margin-left: auto;
