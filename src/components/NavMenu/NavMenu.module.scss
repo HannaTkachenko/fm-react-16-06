@@ -30,6 +30,7 @@ $widthNavMenu:200px;
   color: teal;
   position: fixed;
   left: 20px;
+
 }
 .closeBtn{
   margin-left: auto;
@@ -38,4 +39,7 @@ $widthNavMenu:200px;
 }
 .open{
   left:0;
+}
+.openBtn.open{
+  left:-50px;
 }

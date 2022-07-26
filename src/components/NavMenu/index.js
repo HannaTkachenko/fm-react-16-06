@@ -12,7 +12,10 @@ const NavMenu = () => {
     closeNavMenu,
     openNavMenu,
   } = useContext(MenuContext);
-  const classNames = cx(styles.container, {
+  const classNamesNav = cx(styles.container, {
+    [styles.open]: isMenuOpen,
+  });
+  const classNamesOpen = cx(styles.openBtn, {
     [styles.open]: isMenuOpen,
   });
   const idNav = useId();
@@ -37,10 +40,10 @@ const NavMenu = () => {
     }
   };
   return (
-    <nav className={classNames} id={idNav}>
+    <nav className={classNamesNav} id={idNav}>
       <MenuOpenIcon
         onClick={openNavMenu}
-        className={styles.openBtn}
+        className={classNamesOpen}
         tabIndex="1"
         onKeyDown={tabOpen}
       />
