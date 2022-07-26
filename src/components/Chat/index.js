@@ -8,6 +8,7 @@ const Chat = () => {
   const [state, dispatch] = useReducer(reducer, {
     users: [],
     messages: [],
+    error:null
   });
   useEffect(() => {
     getChatJSON().then((data) =>
