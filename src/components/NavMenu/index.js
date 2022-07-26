@@ -9,7 +9,8 @@ import { MenuContext } from "../../context";
 const NavMenu = () => {
   const {
     state: { isMenuOpen },
-    closeNavMenu,openNavMenu
+    closeNavMenu,
+    openNavMenu,
   } = useContext(MenuContext);
   const classNames = cx(styles.container, {
     [styles.open]: isMenuOpen,
@@ -18,18 +19,37 @@ const NavMenu = () => {
   const navRef = useRef(null);
   useEffect(() => {
     const handlerClickMenu = ({ target }) => {
-      if (isMenuOpen && navRef.current.contains(target)===false) {
+      if (isMenuOpen && navRef.current.contains(target) === false) {
         closeNavMenu();
       }
     };
     window.addEventListener("click", handlerClickMenu);
     return () => window.removeEventListener("click", handlerClickMenu);
   }, [isMenuOpen]);
-
+  const tabOpen = (event) => {
+    if (event.key === "Enter") {
+      openNavMenu();
+    }
+  };
+  const tabClose = (event) => {
+    if (event.key === "Enter") {
+      closeNavMenu();
+    }
+  };
   return (
     <nav className={classNames} ref={navRef}>
-      <MenuOpenIcon onClick={openNavMenu} className={styles.openBtn}/>
-      <CancelPresentationIcon className={styles.closeBtn} onClick={closeNavMenu} />
+      <MenuOpenIcon
+        onClick={openNavMenu}
+        className={styles.openBtn}
+        tabindex="1"
+        onKeyDown={tabOpen}
+      />
+      <CancelPresentationIcon
+        className={styles.closeBtn}
+        onClick={closeNavMenu}
+        tabindex="1"
+        onKeyDown={tabClose}
+      />
       <ul className={styles.list}>
         <li>
           <NavLink to="/">Home</NavLink>
