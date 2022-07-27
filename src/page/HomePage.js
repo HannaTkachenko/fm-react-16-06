@@ -2,6 +2,7 @@ import React, {useState, useContext, useEffect, useCallback, useMemo} from 'reac
 import UserProfile from '../components/UserProfile';
 import { ThemeContext } from '../context';
 import CONSTANTS from "../constants";
+import useClicker from '../hooks/useClicker';
 const {THEMES} = CONSTANTS;
 const currentStyle = {
   [THEMES.LIGHT]:{backgroundColor:'#eee',color:'#222'},
@@ -13,6 +14,7 @@ function calcPow5Value(n){ //O(n)
   return n**5;
 }
 const HomePage = (props) => {
+  const count = useClicker(100);
   const [value, setValue] = useState(10);
   const [theme, setTheme] = useContext(ThemeContext);
   const handlerTheme = useCallback( ()=>{
@@ -26,6 +28,7 @@ const HomePage = (props) => {
   return (
     <div style={currentStyle[theme]}>
       <h1>HomePage</h1>
+      <p>count: {count}</p>
       <h2>value:{memocalcPow5Value}</h2>
       <input type='number' value={value} onChange={handlerInput}/>
       <UserProfile />
