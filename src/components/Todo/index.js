@@ -21,11 +21,10 @@ const Todo = () => {
       <h2>tasks list</h2>
       <ul>
         {
-          tasks.map((task)=><li key={task.id}>{task.body}</li>)
+          tasks.map((task)=><li key={task.id}>{task.body} <span onClick={()=>{deleteTask(task.id)}}>X</span></li>)
         }
       </ul>
     </div>
   );
 };
-
 export default Todo;
